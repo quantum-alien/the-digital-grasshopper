@@ -70,22 +70,22 @@ class GameWidget(QWidget):
                 if gh['row'] == row and gh['col'] == col and not gh['moved']:
                     self.selected_gh = idx
                     self.update()
-                    self.main_window.update_status(f"Выбран кузнечик {gh['number']}")
+                    self.main_window.update_status(f"Grasshopper {gh['number']} selected")
                     return
             
             self.selected_gh = -1
             self.update()
-            self.main_window.update_status("Выберите кузнечика")
+            self.main_window.update_status("Select a grasshopper")
     
     def move_selected(self, direction):
         if self.selected_gh >= 0:
             if self.game.move_grasshopper(self.selected_gh, direction):
                 self.selected_gh = -1
                 self.update()
-                self.main_window.update_status("Ход выполнен")
+                self.main_window.update_status("Move executed")
                 return True
             else:
-                self.main_window.update_status("Невозможно выполнить ход")
+                self.main_window.update_status("Cannot execute move")
         else:
-            self.main_window.update_status("Сначала выберите кузнечика")
+            self.main_window.update_status("First select a grasshopper")
         return False

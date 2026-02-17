@@ -7,7 +7,7 @@ class SettingsDialog(QDialog):
     
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Настройки игры")
+        self.setWindowTitle("Settings")
         self.setModal(True)
         self.setFixedSize(300, 200)
         
@@ -16,22 +16,22 @@ class SettingsDialog(QDialog):
         self.rows_spin = QSpinBox()
         self.rows_spin.setRange(4, 8)
         self.rows_spin.setValue(6)
-        layout.addRow("Количество строк:", self.rows_spin)
+        layout.addRow("Number of rows:", self.rows_spin)
         
         self.cols_spin = QSpinBox()
         self.cols_spin.setRange(4, 8)
         self.cols_spin.setValue(6)
-        layout.addRow("Количество столбцов:", self.cols_spin)
+        layout.addRow("Number of columns:", self.cols_spin)
         
         self.grasshoppers_spin = QSpinBox()
         self.grasshoppers_spin.setRange(3, 8)
         self.grasshoppers_spin.setValue(6)
-        layout.addRow("Количество кузнечиков:", self.grasshoppers_spin)
+        layout.addRow("Number of grasshoppers:", self.grasshoppers_spin)
         
         buttons_layout = QHBoxLayout()
         self.ok_btn = QPushButton("OK")
         self.ok_btn.clicked.connect(self.accept)
-        self.cancel_btn = QPushButton("Отмена")
+        self.cancel_btn = QPushButton("Cancel")
         self.cancel_btn.clicked.connect(self.reject)
         
         buttons_layout.addWidget(self.ok_btn)
@@ -52,7 +52,7 @@ class RulesDialog(QDialog):
     
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Правила игры")
+        self.setWindowTitle("Game's rules")
         self.setModal(True)
         self.setFixedSize(500, 400)
         
@@ -74,59 +74,59 @@ class RulesDialog(QDialog):
             </style>
         </head>
         <body>
-            <h1>Правила игры "Цифровой кузнечик"</h1>
+            <h1>Rules of the Game "The Digital Grasshopper"</h1>
             
             <div class="highlight">
-                <h2>Цель игры</h2>
-                <p>Переместите всех кузнечиков на новые позиции так, чтобы они не пересекались и каждый сделал ровно один ход!</p>
+                <h2>Objective</h2>
+                <p>Move all grasshoppers to new positions so they don't intersect and each one makes exactly one move!</p>
             </div>
             
-            <h2>Основные правила</h2>
+            <h2>Basic Rules</h2>
             <ul>
-                <li><strong>Число = длина прыжка:</strong> Число на кузнечике показывает, на сколько клеток он должен прыгнуть (1, 2, 3 или 4)</li>
-                <li><strong>Один ход на кузнечика:</strong> Каждого кузнечика можно переместить только один раз за уровень</li>
-                <li><strong>Прямолинейное движение:</strong> Кузнечики прыгают только по вертикали или горизонтали</li>
-                <li><strong>Свободный путь:</strong> На пути кузнечика не должно быть других кузнечиков</li>
+                <li><strong>Number = jump length:</strong> The number on the grasshopper shows how many cells it should jump (1, 2, 3, or 4)</li>
+                <li><strong>One move per grasshopper:</strong> Each grasshopper can only be moved once per level</li>
+                <li><strong>Straight movement:</strong> Grasshoppers jump only vertically or horizontally</li>
+                <li><strong>Clear path:</strong> There should be no other grasshoppers in the path</li>
             </ul>
             
-            <h2>Особенности чисел</h2>
+            <h2>Number Characteristics</h2>
             <ul>
-                <li><strong>1:</strong> Прыгает на 1 клетку - самый короткий ход</li>
-                <li><strong>2:</strong> Прыгает на 2 клетки</li>
-                <li><strong>3:</strong> Прыгает на 3 клетки</li>
-                <li><strong>4:</strong> Прыгает на 4 клетки - самый длинный ход</li>
+                <li><strong>1:</strong> Jumps 1 cell - the shortest move</li>
+                <li><strong>2:</strong> Jumps 2 cells</li>
+                <li><strong>3:</strong> Jumps 3 cells</li>
+                <li><strong>4:</strong> Jumps 4 cells - the longest move</li>
             </ul>
             
-            <h2>Как играть</h2>
+            <h2>How to Play</h2>
             <ul>
-                <li>Выберите кузнечика кликом мыши</li>
-                <li>Нажмите кнопку направления (↑↓←→) для перемещения</li>
-                <li>Кузнечик прыгнет ровно на столько клеток, сколько показывает его число</li>
-                <li>Планируйте последовательность ходов carefully!</li>
+                <li>Select a grasshopper by clicking with the mouse</li>
+                <li>Press the direction button (↑↓←→) to move</li>
+                <li>The grasshopper will jump exactly as many cells as its number indicates</li>
+                <li>Plan the sequence of moves carefully!</li>
             </ul>
             
-            <h2>Условия победы</h2>
+            <h2>Victory Conditions</h2>
             <ul>
-                <li>Все кузнечики сделали по одному ходу</li>
-                <li>Ни один кузнечик не вышел за пределы поля</li>
-                <li>Кузнечики не пересекаются на новых позициях</li>
+                <li>All grasshoppers made one move each</li>
+                <li>No grasshopper has gone beyond the field</li>
+                <li>Grasshoppers do not intersect at new positions</li>
             </ul>
             
-            <h2>Стратегия</h2>
+            <h2>Strategy</h2>
             <ul>
-                <li>Начинайте с кузнечиков с большими числами - им нужно больше пространства</li>
-                <li>Кузнечики с числом 1 самые мобильные - оставляйте их на потом</li>
-                <li>Продумывайте порядок ходов, чтобы не блокировать друг друга</li>
+                <li>Start with grasshoppers with larger numbers - they need more space</li>
+                <li>Grasshoppers with number 1 are the most mobile - save them for later</li>
+                <li>Think through the order of moves to avoid blocking each other</li>
             </ul>
             
-            <p class="important">Помните: последовательность ходов имеет решающее значение!</p>
+            <p class="important">Remember: the sequence of moves is crucial!</p>
         </body>
         </html>
         """
         self.web_view.setHtml(html_content)
         layout.addWidget(self.web_view)
         
-        self.close_btn = QPushButton("Закрыть")
+        self.close_btn = QPushButton("Close")
         self.close_btn.clicked.connect(self.accept)
         layout.addWidget(self.close_btn)
         

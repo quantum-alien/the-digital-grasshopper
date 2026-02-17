@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout,
                              QHBoxLayout, QPushButton, QLabel,
-                             QMessageBox)
+                             QMessageBox, QDialog)
 from PyQt5.QtCore import Qt
 
 from game import Game
@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.init_ui()
     
     def init_ui(self):
-        self.setWindowTitle("Цифровой кузнечик")
+        self.setWindowTitle("The Digital Grasshopper")
         self.setFixedSize(700, 600)
         
         central_widget = QWidget()
@@ -27,25 +27,25 @@ class MainWindow(QMainWindow):
         
         control_layout = QHBoxLayout()
         
-        self.status_label = QLabel("Выберите кузнечика для начала")
+        self.status_label = QLabel("Select a grasshopper to start")
         self.status_label.setStyleSheet("font-size: 14px; font-weight: bold;")
         control_layout.addWidget(self.status_label)
         
         control_layout.addStretch()
         
-        self.new_level_btn = QPushButton("Новый уровень")
+        self.new_level_btn = QPushButton("New Level")
         self.new_level_btn.clicked.connect(self.new_level)
         control_layout.addWidget(self.new_level_btn)
         
-        self.restart_btn = QPushButton("Перезапуск")
+        self.restart_btn = QPushButton("Restart")
         self.restart_btn.clicked.connect(self.restart_level)
         control_layout.addWidget(self.restart_btn)
         
-        self.settings_btn = QPushButton("Настройки")
+        self.settings_btn = QPushButton("Settings")
         self.settings_btn.clicked.connect(self.show_settings)
         control_layout.addWidget(self.settings_btn)
         
-        self.rules_btn = QPushButton("Правила")
+        self.rules_btn = QPushButton("Rules")
         self.rules_btn.clicked.connect(self.show_rules)
         control_layout.addWidget(self.rules_btn)
         
@@ -56,19 +56,19 @@ class MainWindow(QMainWindow):
         
         button_layout = QHBoxLayout()
         
-        self.up_btn = QPushButton("↑ Вверх")
+        self.up_btn = QPushButton("↑ Up")
         self.up_btn.clicked.connect(lambda: self.make_move('up'))
         button_layout.addWidget(self.up_btn)
         
-        self.down_btn = QPushButton("↓ Вниз")
+        self.down_btn = QPushButton("↓ Down")
         self.down_btn.clicked.connect(lambda: self.make_move('down'))
         button_layout.addWidget(self.down_btn)
         
-        self.left_btn = QPushButton("← Влево")
+        self.left_btn = QPushButton("← Left")
         self.left_btn.clicked.connect(lambda: self.make_move('left'))
         button_layout.addWidget(self.left_btn)
         
-        self.right_btn = QPushButton("→ Вправо")
+        self.right_btn = QPushButton("→ Right")
         self.right_btn.clicked.connect(lambda: self.make_move('right'))
         button_layout.addWidget(self.right_btn)
         
@@ -80,14 +80,14 @@ class MainWindow(QMainWindow):
         
         if self.game_widget.move_selected(direction):
             if self.game.level_completed:
-                QMessageBox.information(self, "Победа!", "Уровень пройден! Все кузнечики размещены корректно.")
-                self.update_status("Уровень пройден!")
+                QMessageBox.information(self, "Victory!", "Level completed! All grasshoppers are placed correctly.")
+                self.update_status("Level completed!")
             elif self.game.game_over:
-                QMessageBox.warning(self, "Конфликт", "Кузнечики пересеклись! Начните уровень заново.")
-                self.update_status("Конфликт позиций")
+                QMessageBox.warning(self, "Conflict", "Grasshoppers intersected! Restart the level.")
+                self.update_status("Position conflict")
             elif self.game.is_level_stuck():
-                QMessageBox.warning(self, "Тупик", "Невозможно сделать ход! Начните уровень заново.")
-                self.update_status("Тупиковая ситуация")
+                QMessageBox.warning(self, "Deadlock", "Cannot make a move! Restart the level.")
+                self.update_status("Deadlock situation")
     
     def update_status(self, message):
         self.status_label.setText(message)
@@ -96,13 +96,13 @@ class MainWindow(QMainWindow):
         self.game.reset_game()
         self.game_widget.selected_gh = -1
         self.game_widget.update()
-        self.update_status("Новый уровень начат")
+        self.update_status("New level started")
     
     def restart_level(self):
         self.game.reset_game()
         self.game_widget.selected_gh = -1
         self.game_widget.update()
-        self.update_status("Уровень перезапущен")
+        self.update_status("Level restarted")
     
     def show_settings(self):
         dialog = SettingsDialog(self)
